@@ -1,10 +1,15 @@
 export const EstablishmentsTableRow: React.FC<{
   establishment: { [key: string]: string } | null | undefined;
 }> = ({ establishment }) => {
+
+  const cellStyle = {
+    fontSize: '20px',
+  };
+
   return (
     <tr>
-      <td>{establishment?.BusinessName}</td>
-      <td>{establishment?.RatingValue}</td>
+      <td style={cellStyle}>{establishment?.BusinessName}</td>
+      <td style={cellStyle}>{establishment?.RatingValue}</td>
     </tr>
   );
 };

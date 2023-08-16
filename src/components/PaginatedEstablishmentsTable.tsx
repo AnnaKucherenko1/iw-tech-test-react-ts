@@ -13,17 +13,20 @@ const tableStyle = {
 
 export const PaginatedEstablishmentsTable = () => {
   const [error, setError] =
-    useState<{ message: string; [key: string]: string }>();
+    useState<{ message: string;[key: string]: string }>();
   const [establishments, setEstablishments] = useState<
     { [key: string]: string }[]
   >([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [pageNum, setPageNum] = useState(1);
   const [pageCount] = useState(100);
 
   useEffect(() => {
+    setIsLoading(true);
     getEstablishmentRatings(pageNum).then(
       (result) => {
         setEstablishments(result?.establishments);
+        setIsLoading(false);
       },
       (error) => {
         setError(error);
@@ -34,9 +37,11 @@ export const PaginatedEstablishmentsTable = () => {
 
   async function handlePreviousPage() {
     pageNum > 1 && setPageNum(pageNum - 1);
+    setIsLoading(true);
     getEstablishmentRatings(pageNum).then(
       (result) => {
         setEstablishments(result.establishments);
+        setIsLoading(false);
       },
       (error) => {
         setError(error);
@@ -46,9 +51,11 @@ export const PaginatedEstablishmentsTable = () => {
 
   async function handleNextPage() {
     pageNum < pageCount && setPageNum(pageNum + 1);
+    setIsLoading(true);
     getEstablishmentRatings(pageNum).then(
       (result) => {
         setEstablishments(result.establishments);
+        setIsLoading(false);
       },
       (error) => {
         setError(error);
@@ -62,7 +69,7 @@ export const PaginatedEstablishmentsTable = () => {
     return (
       <div style={tableStyle}>
         <h2>Food Hygiene Ratings</h2>
-        <EstablishmentsTable establishments={establishments} />
+        <EstablishmentsTable establishments={establishments} isLoading={isLoading} />
         <EstablishmentsTableNavigation
           pageNum={pageNum}
           pageCount={pageCount}

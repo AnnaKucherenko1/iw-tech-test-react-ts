@@ -7,10 +7,10 @@ const headerStyle: { [key: string]: string | number } = {
   textAlign: "left",
   fontSize: "20px",
 };
-
 export const EstablishmentsTable: React.FC<{
   establishments: { [key: string]: string }[] | null | undefined;
-}> = ({ establishments }) => {
+  isLoading: boolean;
+}> = ({ establishments, isLoading }) => {
   return (
     <table>
       <tbody>
@@ -18,7 +18,11 @@ export const EstablishmentsTable: React.FC<{
           <th style={headerStyle}>Business Name</th>
           <th style={headerStyle}>Rating Value</th>
         </tr>
-        {establishments &&
+        {isLoading ? (
+          <tr>
+            <td colSpan={2}>Loading...</td>
+          </tr>
+        ) : (
           establishments?.map(
             (
               establishment: { [key: string]: string } | null | undefined,
@@ -29,7 +33,8 @@ export const EstablishmentsTable: React.FC<{
                 establishment={establishment}
               />
             )
-          )}
+          )
+        )}
       </tbody>
     </table>
   );

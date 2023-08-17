@@ -13,7 +13,6 @@ export const EstablishmentsTableRow: React.FC<{
   const favorite = favorites?.some(fav => fav.FHRSID === establishment?.FHRSID);
   const checkBoxClick = () => {
     if (establishment) {
-      console.log(establishment)
       toggleFavorite(establishment);
 
     }

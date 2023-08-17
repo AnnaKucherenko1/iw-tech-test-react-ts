@@ -1,9 +1,13 @@
+import { buttonStyle } from "./EstablishmentPage";
 import { headerStyle } from "./EstablishmentsTable";
 import { useFavoritesContext } from "./FavoritesProvider";
 
 
 export const FavoritesTable: React.FC = () => {
-  const { favorites } = useFavoritesContext();
+  const { favorites, toggleFavorite } = useFavoritesContext();
+  const clickRemove = (establishment: { [key: string]: string | null | undefined }) => {
+    toggleFavorite(establishment)
+  }
   return (
     <div>
       <h2>Favorites</h2>
@@ -18,7 +22,7 @@ export const FavoritesTable: React.FC = () => {
               <td>{establishment.BusinessName}</td>
               <td>{establishment.RatingValue}</td>
               <td>
-                <button>remove</button>
+                <button style={buttonStyle} onClick={() => clickRemove(establishment)}>remove</button>
               </td>
             </tr>
           ))}

@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { EstablishmentsTable } from "./EstablishmentsTable";
 import { EstablishmentsTableNavigation } from "./EstablishmentsTableNavigation";
 import { getEstablishmentRatings } from "../api/ratingsAPI";
-import { FavoritesTable } from "./FavoritesTable";
 
 export const tableStyle = {
   background: "rgba(51, 51, 51, 0.9)",
@@ -77,9 +76,6 @@ export const PaginatedEstablishmentsTable = () => {
           onPreviousPage={handlePreviousPage}
           onNextPage={handleNextPage}
         />
-      </div>
-      <div style={tableStyle}>
-        <FavoritesTable />
       </div>
     </>
     );

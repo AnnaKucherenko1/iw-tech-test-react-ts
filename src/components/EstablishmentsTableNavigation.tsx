@@ -1,12 +1,7 @@
+import { EstablishmentsTableNavigationType } from "../types";
+
 const buttonStyle = {
   margin: "0 5px",
-};
-
-type EstablishmentsTableNavigationType = {
-  pageNum: number;
-  pageCount: number;
-  onPreviousPage: () => void;
-  onNextPage: () => void;
 };
 
 export const EstablishmentsTableNavigation = (

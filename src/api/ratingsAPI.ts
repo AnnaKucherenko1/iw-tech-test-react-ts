@@ -1,22 +1,5 @@
-export type EstablishmentsType = {
-  establishments: {}[];
-  meta: {
-    dataSource: string;
-    extractDate: string;
-    itemCount: number;
-    returncode: string;
-    totalCount: number;
-    totalPages: number;
-    pageSize: number;
-    pageNumber: number;
-  };
-  links: [
-    {
-      rel: string;
-      href: string;
-    }
-  ];
-};
+import { EstablishmentsType } from "../types";
+
 
 export function getEstablishmentRatings(
   pageNum: number

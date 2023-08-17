@@ -1,9 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-
-interface FavoritesType {
-  favorites: Array<{ [key: string]: string | null | undefined }>;
-  toggleFavorite: (establishment: { [key: string]: string | null | undefined }) => void;
-}
+import { EstablishmentType, FavoritesType } from '../types';
 
 const FavoritesContext = createContext<FavoritesType | undefined>(undefined);
 
@@ -17,7 +13,7 @@ export const useFavoritesContext = () => {
 
 export const FavoritesProvider: React.FC = ({ children }) => {
   const [favorites, setFavorites] = useState<
-    { [key: string]: string | null | undefined }[]
+    EstablishmentType[]
   >(() => {
     const storedFavorites = localStorage.getItem('favorites');
     return storedFavorites ? JSON.parse(storedFavorites) : [];
@@ -27,7 +23,7 @@ export const FavoritesProvider: React.FC = ({ children }) => {
     localStorage.setItem('favorites', JSON.stringify(favorites));
   }, [favorites]);
 
-  const toggleFavorite = (establishment: { [key: string]: string | null | undefined }) => {
+  const toggleFavorite = (establishment: EstablishmentType) => {
     if (favorites.some(favorite => favorite.FHRSID === establishment.FHRSID)) {
       setFavorites(favorites.filter(favorite => favorite.FHRSID !== establishment.FHRSID));
     } else {

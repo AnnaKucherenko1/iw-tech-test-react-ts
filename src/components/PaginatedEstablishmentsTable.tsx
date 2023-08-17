@@ -8,6 +8,7 @@ export const tableStyle = {
   padding: "10px",
   width: "max-content",
   marginLeft: "50px",
+  marginTop: "10px",
   color: "white",
 };
 

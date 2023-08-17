@@ -1,6 +1,7 @@
 import React from "react";
 import { EstablishmentsTableRow } from "./EstablishmentsTableRow";
 import PropTypes from "prop-types";
+import { ResultAPIType } from "../types";
 
 export const headerStyle: { [key: string]: string | number } = {
   paddingBottom: "10px",
@@ -9,7 +10,7 @@ export const headerStyle: { [key: string]: string | number } = {
   fontSize: "20px",
 };
 export const EstablishmentsTable: React.FC<{
-  establishments: { [key: string]: string }[] | null | undefined;
+  establishments: ResultAPIType[] | null | undefined;
   isLoading: boolean;
 }> = ({ establishments, isLoading }) => {
   return (
@@ -27,7 +28,7 @@ export const EstablishmentsTable: React.FC<{
         ) : (
           establishments?.map(
             (
-              establishment: { [key: string]: string } | null | undefined,
+              establishment: ResultAPIType | null | undefined,
               index: React.Key | null | undefined
             ) => (
               <EstablishmentsTableRow

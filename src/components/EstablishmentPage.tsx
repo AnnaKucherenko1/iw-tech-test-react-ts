@@ -6,9 +6,8 @@ import { tableStyle } from './PaginatedEstablishmentsTable';
 import { cellStyle } from './EstablishmentsTableRow';
 import { logoStyle } from './HomePage';
 import { FavoritesTable } from './FavoritesTable';
-type EstablishmentsType = {
-  [key: string]: any;
-};
+import { ResultAPIType } from '../types';
+
 export const buttonStyle = {
   background: 'rgba(51, 51, 51, 0.9)',
   padding: '10px',
@@ -25,11 +24,11 @@ const EstablishmentPage = () => {
     message: string;
     [key: string]: string;
   }>();
-  const [establishment, setEstablishment] = useState<EstablishmentsType>({});
+  const [establishment, setEstablishment] = useState<ResultAPIType>({});
 
   useEffect(() => {
     getEstablishment(id as string).then(
-      (result: EstablishmentsType) => {
+      (result: ResultAPIType) => {
         setEstablishment(result);
       },
       (error) => {

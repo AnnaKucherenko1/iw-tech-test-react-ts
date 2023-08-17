@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 
 export const headerStyle: { [key: string]: string | number } = {
   paddingBottom: "10px",
+  paddingRight: "10px",
   textAlign: "left",
   fontSize: "20px",
 };
@@ -17,6 +18,7 @@ export const EstablishmentsTable: React.FC<{
         <tr>
           <th style={headerStyle}>Business Name</th>
           <th style={headerStyle}>Rating Value</th>
+          <th style={headerStyle}>Favorite</th>
         </tr>
         {isLoading ? (
           <tr>

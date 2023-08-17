@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { EstablishmentsTable } from "./EstablishmentsTable";
 import { EstablishmentsTableNavigation } from "./EstablishmentsTableNavigation";
 import { getEstablishmentRatings } from "../api/ratingsAPI";
+import { FavoritesTable } from "./FavoritesTable";
 
 export const tableStyle = {
   background: "rgba(51, 51, 51, 0.9)",
@@ -66,7 +67,7 @@ export const PaginatedEstablishmentsTable = () => {
   if (error) {
     return <div>Error: {error.message}</div>;
   } else {
-    return (
+    return (<>
       <div style={tableStyle}>
         <h2>Food Hygiene Ratings</h2>
         <EstablishmentsTable establishments={establishments} isLoading={isLoading} />
@@ -77,6 +78,10 @@ export const PaginatedEstablishmentsTable = () => {
           onNextPage={handleNextPage}
         />
       </div>
+      <div style={tableStyle}>
+        <FavoritesTable />
+      </div>
+    </>
     );
   }
 };

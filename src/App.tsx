@@ -1,9 +1,14 @@
 import React, { Component } from "react";
-import HomePage from "./components/HomePage";
+import { BrowserRouter as Router, } from "react-router-dom";
+import Root from "./root";
 
 class App extends Component {
   render() {
-    return <HomePage />;
+    return (
+      <Router>
+        <Root />
+      </Router>
+    )
   }
 }
 

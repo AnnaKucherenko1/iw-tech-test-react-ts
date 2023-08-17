@@ -3,7 +3,7 @@ import { EstablishmentsTable } from "./EstablishmentsTable";
 import { EstablishmentsTableNavigation } from "./EstablishmentsTableNavigation";
 import { getEstablishmentRatings } from "../api/ratingsAPI";
 
-const tableStyle = {
+export const tableStyle = {
   background: "rgba(51, 51, 51, 0.9)",
   padding: "10px",
   width: "max-content",

@@ -1,20 +1,23 @@
-import { useState, useEffect } from "react";
-import { EstablishmentsTable } from "./EstablishmentsTable";
-import { EstablishmentsTableNavigation } from "./EstablishmentsTableNavigation";
-import { getEstablishmentRatings } from "../api/ratingsAPI";
+import { useState, useEffect } from 'react';
+import { EstablishmentsTable } from './EstablishmentsTable';
+import { EstablishmentsTableNavigation } from './EstablishmentsTableNavigation';
+import { getEstablishmentRatings } from '../api/ratingsAPI';
 
 export const tableStyle = {
-  background: "rgba(51, 51, 51, 0.9)",
-  padding: "10px",
-  width: "max-content",
-  marginLeft: "50px",
-  marginTop: "10px",
-  color: "white",
+  background: 'rgba(51, 51, 51, 0.9)',
+  padding: '10px',
+  width: 'max-content',
+  marginLeft: '50px',
+  marginTop: '10px',
+  color: 'white',
 };
 
 export const PaginatedEstablishmentsTable = () => {
-  const [error, setError] =
-    useState<{ message: string;[key: string]: string }>();
+  const [error, setError] = useState<{
+    message: string;
+    [key: string]: string;
+  }>();
+
   const [establishments, setEstablishments] = useState<
     { [key: string]: string }[]
   >([]);
@@ -63,22 +66,25 @@ export const PaginatedEstablishmentsTable = () => {
       }
     );
   }
-
   if (error) {
     return <div>Error: {error.message}</div>;
   } else {
-    return (<>
-      <div style={tableStyle}>
-        <h2>Food Hygiene Ratings</h2>
-        <EstablishmentsTable establishments={establishments} isLoading={isLoading} />
-        <EstablishmentsTableNavigation
-          pageNum={pageNum}
-          pageCount={pageCount}
-          onPreviousPage={handlePreviousPage}
-          onNextPage={handleNextPage}
-        />
+    return (
+      <div>
+        <div style={tableStyle}>
+          <h2>Food Hygiene Ratings</h2>
+          <EstablishmentsTable
+            establishments={establishments}
+            isLoading={isLoading}
+          />
+          <EstablishmentsTableNavigation
+            pageNum={pageNum}
+            pageCount={pageCount}
+            onPreviousPage={handlePreviousPage}
+            onNextPage={handleNextPage}
+          />
+        </div>
       </div>
-    </>
     );
   }
 };

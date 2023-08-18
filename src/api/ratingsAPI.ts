@@ -1,4 +1,4 @@
-import { EstablishmentsType } from "../types";
+import { AuthoritiesType, EstablishmentsType } from "../types";
 
 
 export function getEstablishmentRatings(
@@ -17,4 +17,12 @@ export function getEstablishment(
     { headers: { "x-api-version": "2" } }
   ).then((res) => res.json());
 }
+export function getAuthorities (
+): Promise<AuthoritiesType> {
+  return fetch(
+    `http://api.ratings.food.gov.uk/Authorities`,
+    { headers: { "x-api-version": "2" } }
+  ).then((res) => res.json());
+}
+
 

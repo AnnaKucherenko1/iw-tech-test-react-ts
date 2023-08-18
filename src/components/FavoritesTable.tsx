@@ -4,7 +4,6 @@ import { headerStyle } from "./EstablishmentsTable";
 import { cellStyle } from "./EstablishmentsTableRow";
 import { useFavoritesContext } from "./FavoritesProvider";
 
-
 export const FavoritesTable: React.FC = () => {
   const { favorites, toggleFavorite } = useFavoritesContext();
   const clickRemove = (establishment: EstablishmentType) => {

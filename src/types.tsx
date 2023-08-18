@@ -33,3 +33,22 @@ export type EstablishmentsType = {
     }
   ];
 };
+export type AuthoritiesType = {
+  authorities: {}[];
+  meta: {
+    dataSource: string;
+    extractDate: string;
+    itemCount: number;
+    returncode: string;
+    totalCount: number;
+    totalPages: number;
+    pageSize: number;
+    pageNumber: number;
+  };
+  links: [
+    {
+      rel: string;
+      href: string;
+    }
+  ];
+};

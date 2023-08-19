@@ -50,7 +50,7 @@ export const PaginatedEstablishmentsTable = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filtredId]);
-
+  console.log(filtredId)
   async function handlePreviousPage() {
     pageNum > 1 && setPageNum(pageNum - 1);
     setIsLoading(true);

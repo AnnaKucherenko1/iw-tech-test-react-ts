@@ -1,22 +1,23 @@
 import React, { useState } from "react";
 import './dropdown.css'
 import { ResultAPIType } from "../../types";
+import { useFavoritesContext } from "../FavoritesProvider";
 
 export default function Dropdown({ authorities }: ResultAPIType) {
   const [dropdownState, setDropdownState] = useState(false);
+  const { setFiltredId } = useFavoritesContext();
 
   const handleDropdownClick = () => {
     setDropdownState(!dropdownState);
   }
-  const uniqueRegionNames = authorities.reduce((uniqueRegions: string[], authority: { RegionName: string }) => {
-    if (!uniqueRegions.includes(authority.RegionName)) {
-      uniqueRegions.push(authority.RegionName);
+  const uniqueRegionData = authorities.reduce((uniqueRegions: { [key: string]: string }, authority: { LocalAuthorityId: string, RegionName: string }) => {
+    if (!uniqueRegions[authority.RegionName]) {
+      uniqueRegions[authority.RegionName] = authority.LocalAuthorityId;
     }
     return uniqueRegions;
-  }, []);
+  }, {});
 
-  console.log(authorities)
-  console.log(uniqueRegionNames)
+
 
   return (
     <div className='container'>
@@ -30,9 +31,15 @@ export default function Dropdown({ authorities }: ResultAPIType) {
       {dropdownState && (
         <div className='dropdown'>
           <ul>
-            {uniqueRegionNames.map((regionName: string, index: number) => (
-              <li key={index}>{regionName}</li>
+            {Object.keys(uniqueRegionData).map((regionName: string, index: number) => (
+              <li
+                key={index}
+                onClick={() => setFiltredId(uniqueRegionData[regionName])}
+              >
+                {regionName}
+              </li>
             ))}
+            <li onClick={() => setFiltredId('')}>All authorities</li>
           </ul>
         </div>
       )}

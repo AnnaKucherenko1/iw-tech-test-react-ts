@@ -35,7 +35,8 @@ const EstablishmentPage = () => {
         setError(error);
       }
     );
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);

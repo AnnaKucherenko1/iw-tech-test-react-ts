@@ -25,4 +25,14 @@ export function getAuthorities (
   ).then((res) => res.json());
 }
 
+export function getEstablishmentByAuthority (
+  localAuthorityId: string,
+  pageNum: number
+  ): Promise<EstablishmentsType> {
+    return fetch(
+      `http://api.ratings.food.gov.uk/Establishments?localAuthorityId=${localAuthorityId}&pageNumber=${pageNum}/&pageSize=10`,
+      { headers: { "x-api-version": "2" } }
+    ).then((res) => res.json());
+  }
+  
 

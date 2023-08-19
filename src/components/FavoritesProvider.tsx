@@ -18,6 +18,10 @@ export const FavoritesProvider: React.FC = ({ children }) => {
     const storedFavorites = localStorage.getItem('favorites');
     return storedFavorites ? JSON.parse(storedFavorites) : [];
   });
+  const [establishments, setEstablishments] = useState<
+    { [key: string]: string }[]
+  >([]);
+  const [filtredId, setFiltredId] = useState('')
 
   useEffect(() => {
     localStorage.setItem('favorites', JSON.stringify(favorites));
@@ -32,7 +36,7 @@ export const FavoritesProvider: React.FC = ({ children }) => {
   };
 
   return (
-    <FavoritesContext.Provider value={{ favorites, toggleFavorite }}>
+    <FavoritesContext.Provider value={{ favorites, toggleFavorite, establishments, setEstablishments, filtredId, setFiltredId }}>
       {children}
     </FavoritesContext.Provider>
   );

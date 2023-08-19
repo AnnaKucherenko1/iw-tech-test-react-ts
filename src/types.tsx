@@ -1,9 +1,15 @@
+import { Dispatch, SetStateAction } from "react";
+
 export type EstablishmentType = {
   [key: string]: string | null | undefined
 }
 export type FavoritesType = {
   favorites: Array<{ [key: string]: string | null | undefined }>;
   toggleFavorite: (establishment: EstablishmentType) => void;
+  establishments: ResultAPIType[];
+  setEstablishments: Dispatch<SetStateAction<{ [key: string]: string; }[]>>;
+  filtredId: string,
+  setFiltredId: Dispatch<SetStateAction<string>>
 }
 export type ResultAPIType = {
   [key: string]: any;

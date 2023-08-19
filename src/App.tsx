@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, } from "react-router-dom";
 import Root from "./root";
-import { FavoritesProvider } from "./components/FavoritesProvider";
+import { AppProvider } from "./components/AppProvider";
 
 class App extends Component {
   render() {
     return (
-      <FavoritesProvider>
+      <AppProvider>
         <Router>
           <Root />
         </Router>
-      </FavoritesProvider>
+      </AppProvider>
     )
   }
 }

@@ -1,8 +1,12 @@
 import { useState, useEffect } from 'react';
 import { EstablishmentsTable } from './EstablishmentsTable';
 import { EstablishmentsTableNavigation } from './EstablishmentsTableNavigation';
-import { getEstablishmentByAuthority, getEstablishmentRatings } from '../api/ratingsAPI';
-import { useFavoritesContext } from './FavoritesProvider';
+import {
+  getEstablishmentByAuthority,
+  getEstablishmentRatings,
+} from '../api/ratingsAPI';
+import { useAppContext } from './AppProvider';
+
 
 export const tableStyle = {
   background: 'rgba(51, 51, 51, 0.9)',
@@ -21,14 +25,13 @@ export const PaginatedEstablishmentsTable = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [pageNum, setPageNum] = useState(1);
   const [pageCount] = useState(100);
-  const { establishments, setEstablishments, filtredId } = useFavoritesContext();
+  const { establishments, setEstablishments, filtredId } = useAppContext();
 
   useEffect(() => {
     setIsLoading(true);
     if (filtredId === '') {
       getEstablishmentRatings(pageNum).then(
         (result) => {
-          console.log(result)
           setEstablishments(result?.establishments);
           setIsLoading(false);
         },
@@ -39,8 +42,7 @@ export const PaginatedEstablishmentsTable = () => {
     } else {
       getEstablishmentByAuthority(filtredId, pageNum).then(
         (result) => {
-          setEstablishments(result.establishments)
-          console.log(establishments, 'this is establishment from dropdown')
+          setEstablishments(result.establishments);
           setIsLoading(false);
         },
         (error) => {
@@ -50,12 +52,12 @@ export const PaginatedEstablishmentsTable = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filtredId]);
-  console.log(filtredId)
+
   async function handlePreviousPage() {
     pageNum > 1 && setPageNum(pageNum - 1);
     setIsLoading(true);
     if (filtredId === '') {
-      getEstablishmentRatings(pageNum).then(
+      getEstablishmentRatings(pageNum - 1).then(
         (result) => {
           setEstablishments(result.establishments);
           setIsLoading(false);
@@ -65,9 +67,9 @@ export const PaginatedEstablishmentsTable = () => {
         }
       );
     } else {
-      getEstablishmentByAuthority(filtredId, pageNum).then(
+      getEstablishmentByAuthority(filtredId, pageNum - 1).then(
         (result) => {
-          setEstablishments(result.establishments)
+          setEstablishments(result.establishments);
           setIsLoading(false);
         },
         (error) => {
@@ -76,13 +78,12 @@ export const PaginatedEstablishmentsTable = () => {
       );
     }
   }
-  console.log(establishments, 'for test')
+
   async function handleNextPage() {
     pageNum < pageCount && setPageNum(pageNum + 1);
     setIsLoading(true);
     if (filtredId === '') {
-      console.log('i am here in defoult call', pageNum, filtredId)
-      getEstablishmentRatings(pageNum).then(
+      getEstablishmentRatings(pageNum + 1).then(
         (result) => {
           setEstablishments(result.establishments);
           setIsLoading(false);
@@ -92,11 +93,9 @@ export const PaginatedEstablishmentsTable = () => {
         }
       );
     } else {
-      console.log('i am here in filtred call', pageNum, filtredId)
-      getEstablishmentByAuthority(filtredId, pageNum).then(
+      getEstablishmentByAuthority(filtredId, pageNum + 1).then(
         (result) => {
-          setEstablishments(result.establishments)
-          console.log(result)
+          setEstablishments(result.establishments);
           setIsLoading(false);
         },
         (error) => {

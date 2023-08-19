@@ -3,7 +3,7 @@ import { Dispatch, SetStateAction } from "react";
 export type EstablishmentType = {
   [key: string]: string | null | undefined
 }
-export type FavoritesType = {
+export type ProviderType = {
   favorites: Array<{ [key: string]: string | null | undefined }>;
   toggleFavorite: (establishment: EstablishmentType) => void;
   establishments: ResultAPIType[];

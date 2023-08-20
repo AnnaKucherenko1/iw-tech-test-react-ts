@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { EstablishmentType } from '../types';
 import { useAppContext } from '../AppProvider';
+import { useMemo } from 'react';
 
 export const cellStyle = {
   fontSize: '20px',
@@ -12,9 +13,15 @@ export const EstablishmentsTableRow: React.FC<{
 }> = ({ establishment }) => {
   const linkTo = `/establishment/${establishment?.FHRSID}`;
   const { toggleFavorite, favorites } = useAppContext();
-  const favorite = favorites?.some(
-    (fav: EstablishmentType) => fav.FHRSID === establishment?.FHRSID
+
+  const favorite = useMemo(
+    () =>
+      favorites?.some(
+        (fav: EstablishmentType) => fav.FHRSID === establishment?.FHRSID
+      ),
+    [favorites, establishment]
   );
+
   const checkBoxClick = () => {
     if (establishment) {
       toggleFavorite(establishment);

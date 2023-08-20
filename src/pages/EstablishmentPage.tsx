@@ -18,6 +18,7 @@ export const buttonStyle = {
 
 const EstablishmentPage = () => {
   const { id } = useParams();
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const [error, setError] = useState<{
     message: string;
@@ -26,16 +27,17 @@ const EstablishmentPage = () => {
   const [establishment, setEstablishment] = useState<ResultAPIType>({});
 
   useEffect(() => {
+    setIsLoading(true)
     getEstablishment(id as string).then(
       (result: ResultAPIType) => {
         setEstablishment(result);
+        setIsLoading(false)
       },
       (error) => {
         setError(error);
       }
     );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [id]);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -64,30 +66,36 @@ const EstablishmentPage = () => {
                   <th style={headerStyle}>Rating Value</th>
                   <th style={headerStyle}>Date of Inspection</th>
                 </tr>
-                <tr style={{ borderBottom: '1px solid #ccc' }}>
-                  <td style={{ ...cellStyle, borderRight: '1px solid #ccc' }}>
-                    {establishment?.AddressLine1 !== '' &&
-                      `${establishment?.AddressLine1},`}
-                    <br />
-                    {establishment?.AddressLine2 !== '' &&
-                      `${establishment?.AddressLine2},`}
-                    <br />
-                    {establishment?.AddressLine3 !== '' &&
-                      `${establishment?.AddressLine3},`}
-                    <br />
-                    {establishment?.AddressLine4 !== '' &&
-                      establishment?.AddressLine4}
-                  </td>
-                  <td style={{ ...cellStyle, borderRight: '1px solid #ccc' }}>
-                    {establishment?.RatingValue}
-                  </td>
-                  <td style={cellStyle}>
-                    {establishment?.RatingDate
-                      ? formatDate(establishment?.RatingDate)
-                      : ''}
-                  </td>
-                  <td style={cellStyle}></td>
-                </tr>
+                {isLoading ? (
+                  <tr>
+                    <td colSpan={3}>Loading...</td>
+                  </tr>
+                ) : (
+                  <tr style={{ borderBottom: '1px solid #ccc' }}>
+                    <td style={{ ...cellStyle, borderRight: '1px solid #ccc' }}>
+                      {establishment?.AddressLine1 !== '' &&
+                        `${establishment?.AddressLine1},`}
+                      <br />
+                      {establishment?.AddressLine2 !== '' &&
+                        `${establishment?.AddressLine2},`}
+                      <br />
+                      {establishment?.AddressLine3 !== '' &&
+                        `${establishment?.AddressLine3},`}
+                      <br />
+                      {establishment?.AddressLine4 !== '' &&
+                        establishment?.AddressLine4}
+                    </td>
+                    <td style={{ ...cellStyle, borderRight: '1px solid #ccc' }}>
+                      {establishment?.RatingValue}
+                    </td>
+                    <td style={cellStyle}>
+                      {establishment?.RatingDate
+                        ? formatDate(establishment?.RatingDate)
+                        : ''}
+                    </td>
+                    <td style={cellStyle}></td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>

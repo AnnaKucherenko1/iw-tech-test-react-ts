@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { ResultAPIType } from '../types';
 import { useAppContext } from '../AppProvider';
 import { buttonStyle } from '../pages/EstablishmentPage';
@@ -29,17 +29,21 @@ export default function Dropdown({ authorities }: ResultAPIType) {
     setDropdownState(!dropdownState);
   };
 
-  const uniqueRegionData = authorities.reduce(
-    (
-      uniqueRegions: { [key: string]: string },
-      authority: { LocalAuthorityId: string; RegionName: string }
-    ) => {
-      if (!uniqueRegions[authority.RegionName]) {
-        uniqueRegions[authority.RegionName] = authority.LocalAuthorityId;
-      }
-      return uniqueRegions;
-    },
-    {}
+  const uniqueRegionData = useMemo(
+    () =>
+      authorities.reduce(
+        (
+          uniqueRegions: { [key: string]: string },
+          authority: { LocalAuthorityId: string; RegionName: string }
+        ) => {
+          if (!uniqueRegions[authority.RegionName]) {
+            uniqueRegions[authority.RegionName] = authority.LocalAuthorityId;
+          }
+          return uniqueRegions;
+        },
+        {}
+      ),
+    [authorities]
   );
 
   return (

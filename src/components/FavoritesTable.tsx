@@ -4,7 +4,7 @@ import { headerStyle } from './EstablishmentsTable';
 import { cellStyle } from './EstablishmentsTableRow';
 import { useAppContext } from '../AppProvider';
 const favoritesTableStyle: React.CSSProperties = {
-  maxHeight: '200px',
+  maxHeight: '150px',
   overflowY: 'scroll',
 }
 

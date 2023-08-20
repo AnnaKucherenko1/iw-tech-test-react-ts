@@ -4,7 +4,7 @@ import {
 } from './PaginatedEstablishmentsTable';
 import Background from '../static/logo.svg';
 import { FavoritesTable } from './FavoritesTable';
-import Dropdown from './Dropdown/Dropdown';
+import Dropdown from './Dropdown';
 import { useEffect, useState } from 'react';
 import { getAuthorities } from '../api/ratingsAPI';
 
@@ -14,10 +14,12 @@ export const logoStyle: { [key: string]: string | number } = {
   background: `transparent url(${Background}) no-repeat center`,
   margin: '20px auto',
 };
+
 const mainDiv: React.CSSProperties = {
   display: 'flex',
   flexDirection: 'row',
 };
+
 const tablesStyle: React.CSSProperties = {
   display: 'flex',
   flexDirection: 'column',

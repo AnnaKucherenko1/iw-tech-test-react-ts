@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { EstablishmentType } from '../types';
-import { useAppContext } from './AppProvider';
+import { useAppContext } from '../AppProvider';
 
 export const cellStyle = {
   fontSize: '20px',

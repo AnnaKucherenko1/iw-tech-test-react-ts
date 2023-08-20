@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { EstablishmentType, ProviderType } from '../types';
+import { EstablishmentType, ProviderType } from './types';
 
 const AppContext = createContext<ProviderType | undefined>(undefined);
 
@@ -16,10 +16,11 @@ export const AppProvider: React.FC = ({ children }) => {
     const storedFavorites = localStorage.getItem('favorites');
     return storedFavorites ? JSON.parse(storedFavorites) : [];
   });
+  const [pageNum, setPageNum] = useState<number>(1);
   const [establishments, setEstablishments] = useState<
     { [key: string]: string }[]
   >([]);
-  const [filtredId, setFiltredId] = useState('');
+  const [filtredId, setFiltredId] = useState<string>('');
 
   useEffect(() => {
     localStorage.setItem('favorites', JSON.stringify(favorites));
@@ -46,6 +47,8 @@ export const AppProvider: React.FC = ({ children }) => {
         setEstablishments,
         filtredId,
         setFiltredId,
+        pageNum,
+        setPageNum
       }}
     >
       {children}

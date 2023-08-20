@@ -5,8 +5,7 @@ import {
   getEstablishmentByAuthority,
   getEstablishmentRatings,
 } from '../api/ratingsAPI';
-import { useAppContext } from './AppProvider';
-
+import { useAppContext } from '../AppProvider';
 
 export const tableStyle = {
   background: 'rgba(51, 51, 51, 0.9)',
@@ -23,13 +22,12 @@ export const PaginatedEstablishmentsTable = () => {
     [key: string]: string;
   }>();
   const [isLoading, setIsLoading] = useState(false);
-  const [pageNum, setPageNum] = useState(1);
   const [pageCount] = useState(100);
-  const { establishments, setEstablishments, filtredId } = useAppContext();
+  const { establishments, setEstablishments, filtredId, pageNum, setPageNum } = useAppContext();
 
   useEffect(() => {
-    setIsLoading(true);
     if (filtredId === '') {
+      setIsLoading(true);
       getEstablishmentRatings(pageNum).then(
         (result) => {
           setEstablishments(result?.establishments);

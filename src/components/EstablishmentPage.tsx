@@ -11,8 +11,7 @@ import { ResultAPIType } from '../types';
 export const buttonStyle = {
   background: 'rgba(51, 51, 51, 0.9)',
   padding: '10px',
-  marginTop: '5px',
-  marginLeft: '50px',
+  marginTop: '10px',
   color: 'white',
   borderRadius: '5px',
 };
@@ -92,7 +91,7 @@ const EstablishmentPage = () => {
               </tbody>
             </table>
           </div>
-          <button onClick={handleBtnClick} style={buttonStyle}>
+          <button onClick={handleBtnClick} style={{ ...buttonStyle, marginLeft: '50px', }}>
             go back
           </button>
         </div>

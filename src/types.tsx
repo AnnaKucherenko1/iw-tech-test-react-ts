@@ -10,6 +10,8 @@ export type ProviderType = {
   setEstablishments: Dispatch<SetStateAction<{ [key: string]: string; }[]>>;
   filtredId: string,
   setFiltredId: Dispatch<SetStateAction<string>>
+  pageNum: number;
+  setPageNum: Dispatch<SetStateAction<number>>
 }
 export type ResultAPIType = {
   [key: string]: any;
